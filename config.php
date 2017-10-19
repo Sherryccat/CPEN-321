@@ -6,6 +6,8 @@
  * Time: 4:47 PM
  */
 
+//header("Access-Control-Allow-Origin: *");
+
 //For Database
 $server = "localhost";
 $username = "http.user";
