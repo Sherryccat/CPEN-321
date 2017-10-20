@@ -32,12 +32,12 @@ if (isset($_POST['api_key']) and $_POST['api_key'] == "hello") {
         //If the posted values are equal to the database values, then result will be 1.
         if ($count == 1) {
             $msg = "Authenticate successfully.";
-            $result = 1;
+            $res_code = 1;
             $userID = $row['id'];
         } else {
             //If the login credentials doesn't match, he will be shown with an error message.
             $msg = "Invalid Login Credentials.";
-            $result = -1;
+            $res_code = -1;
         }
     } //Register new user
     elseif ($_POST['action'] == "register" and isset($_POST['username']) and isset($_POST['password']) and isset($_POST['email'])) {
@@ -51,22 +51,22 @@ if (isset($_POST['api_key']) and $_POST['api_key'] == "hello") {
 
         if ($conn->query($query)) {
             $msg = "New account created";
-            $result = 2;
+            $res_code = 2;
             $userID = $conn->insert_id;
         } else {
             $msg = $conn->error;
-            $result = -2;
+            $res_code = -2;
         }
 
     }
 } else {
     $msg = "Wrong request format";
-    $result = 99;
+    $res_code = 99;
 }
 
 
 $jsonObj->message = $msg;
-$jsonObj->result = $result;
+$jsonObj->res_code = $res_code;
 $jsonObj->userID = $userID;
 
 header('Content-Type: application/json');
